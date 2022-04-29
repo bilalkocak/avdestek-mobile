@@ -17,13 +17,13 @@ function LoginScreen({navigation}) {
             <View style={styles.inputView}>
                 <TextInput
                     style={styles.textInput}
-                    placeholder="Email."
+                    placeholder="Eposta"
                     placeholderTextColor="#E7E7E7"
                     onChangeText={(email) => setEmail(email)}
                 />
                 <TextInput
                     style={styles.textInput}
-                    placeholder="Password."
+                    placeholder="Parola"
                     placeholderTextColor="#E7E7E7"
                     secureTextEntry={true}
                     onChangeText={(password) => setPassword(password)}
@@ -33,9 +33,9 @@ function LoginScreen({navigation}) {
             <View style={styles.buttonView}>
 
                 <TouchableOpacity>
-                    <Text style={styles.forgot_button}>Forgot Password?</Text>
+                    <Text style={styles.forgot_button}>Şifremi unuttum</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate('Timeline')}>
+                <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate('second')}>
                     <Text>Üye Girişi</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate('register')}>
@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     textInput: {
         flex: 1,
         padding: 10,
+        paddingHorizontal: 20,
         marginLeft: 20,
         color: "#E7E7E7",
         borderRadius: 30,

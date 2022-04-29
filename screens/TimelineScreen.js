@@ -3,11 +3,12 @@ import {SafeAreaView, ScrollView, StatusBar, StyleSheet} from "react-native";
 import LawyerCard from "../components/LawyerCard";
 
 
-const TimelineScreen = () => {
+const TimelineScreen = ({navigation}) => {
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView style={styles.scrollView}>
+            <ScrollView >
                 <LawyerCard
+                    navigation={navigation}
                     name={'bilal'}
                     bio={'Aile/Ticaret'}
                     email={'bilalkocak04@yandex.com'}
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 42,
-    },
+    }
 });
 
 export default TimelineScreen;

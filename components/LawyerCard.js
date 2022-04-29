@@ -2,8 +2,9 @@ import React from 'react';
 import {Avatar, Button, Card, Title, Paragraph} from 'react-native-paper';
 
 import PropTypes from 'prop-types';
+import {StyleSheet} from "react-native";
 
-const LeftContent = props => <Avatar.Icon {...props} icon="account-clock"/>
+const LeftContent = props => <Avatar.Icon {...props} icon="account"/>
 
 const LawyerCard = ({
                         name,
@@ -12,26 +13,46 @@ const LawyerCard = ({
                         phone,
                         email,
                         website,
-                        bio
+                        bio,
+                        navigation
                     }) => {
     return (
-
-        <Card>
-            <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent}/>
+        <Card style={styles.container}>
+            <Card.Title  title="Tarık Erol" subtitle="İzmir" left={LeftContent}/>
             <Card.Content>
                 <Title>Card title</Title>
                 <Paragraph>Card content</Paragraph>
             </Card.Content>
-            <Card.Cover source={{uri: 'https://picsum.photos/700'}}/>
-            <Card.Actions>
-                <Button>Cancel</Button>
-                <Button>Ok</Button>
+            <Card.Actions style={styles.actions}>
+                <Button icon={'message'}>mesaj</Button>
+                <Button onPress={() => navigation.navigate('Profile')}>profile</Button>
             </Card.Actions>
         </Card>
 
     );
 };
-
+const styles = StyleSheet.create({
+    container: {
+        marginTop: 10,
+        borderRadius: 15,
+        padding: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        width: "95%",
+        marginLeft: "auto",
+        marginRight: "auto",
+        shadowOpacity: 0.27,
+        shadowRadius: 4.65,
+        elevation: 6,
+    },
+    actions: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+    }
+});
 
 LawyerCard.propTypes = {
     name: PropTypes.string,

@@ -6,6 +6,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import TimelineScreen from "./screens/TimelineScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
+import SecondScreen from "./screens/SecondScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -26,6 +27,9 @@ export default function App() {
                 <Stack.Navigator>
                     <Stack.Screen name="Home" component={LoginScreen}/>
                     <Stack.Screen name="Profile" component={ProfileScreen}/>
+                    <Stack.Screen name="second" options={{
+                        title: "Ne arıyorsun ?"
+                    }}  component={SecondScreen}/>
                     <Stack.Screen name="Timeline" component={TimelineScreen}/>
                     <Stack.Screen name="register" component={RegisterScreen}/>
                 </Stack.Navigator>
