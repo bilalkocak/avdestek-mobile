@@ -1,34 +1,45 @@
-import React from 'react';
-import {Avatar, Button, Card, Title, Paragraph} from 'react-native-paper';
+import React from "react";
+import {Avatar, Button, Card, Title, Paragraph, Badge} from "react-native-paper";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import {StyleSheet} from "react-native";
 
-const LeftContent = props => <Avatar.Icon {...props} icon="account"/>
+const LeftContent = (props) => <Avatar.Icon {...props} icon="account-search" color={'white'}/>;
 
 const LawyerCard = ({
-                        name,
-                        specialty,
-                        location,
-                        phone,
-                        email,
-                        website,
-                        bio,
-                        navigation
+                        data,
+                        navigation,
+                        loggedUser,
+                        isMyJob
                     }) => {
+
     return (
         <Card style={styles.container}>
-            <Card.Title  title="Tarık Erol" subtitle="İzmir" left={LeftContent}/>
+            <Card.Title title={`${data.user.name} ${data.user.surname}`} subtitle={data.city.label} left={LeftContent}
+                        right={() => <Badge
+                            style={{
+                                backgroundColor: 'tomato',
+                                color: 'white',
+                                paddingHorizontal: 10
+                            }}>{'Yeni'}</Badge>}/>
             <Card.Content>
-                <Title>Card title</Title>
-                <Paragraph>Card content</Paragraph>
+                <Title>{data.title}</Title>
+                <Paragraph>{data.description}</Paragraph>
             </Card.Content>
             <Card.Actions style={styles.actions}>
-                <Button icon={'message'}>mesaj</Button>
-                <Button onPress={() => navigation.navigate('Profile')}>profile</Button>
+                {
+                    !isMyJob &&
+                    <Button onPress={() => navigation.navigate("chat", {
+                        receiver: data.user._id,
+                        ownUser: loggedUser,
+                        channel: `${data._id}_${loggedUser._id}`,
+                        advertId: data._id
+                    })} icon={'message'}>mesaj</Button>
+                }
+                <Button onPress={() => navigation.navigate('detail', {data, isMyJob})}
+                        icon={'arrow-top-right-thick'}>Detay</Button>
             </Card.Actions>
         </Card>
-
     );
 };
 const styles = StyleSheet.create({
@@ -41,7 +52,7 @@ const styles = StyleSheet.create({
             width: 0,
             height: 3,
         },
-        width: "95%",
+        width: "100%",
         marginLeft: "auto",
         marginRight: "auto",
         shadowOpacity: 0.27,
@@ -51,17 +62,20 @@ const styles = StyleSheet.create({
     actions: {
         flexDirection: "row",
         justifyContent: "space-around",
-    }
+    },
 });
 
+LawyerCard.defaultProps = {
+    data: {},
+    loggedUser: {},
+    isMyJob: false
+};
+
 LawyerCard.propTypes = {
-    name: PropTypes.string,
-    specialty: PropTypes.string,
-    location: PropTypes.string,
-    phone: PropTypes.string,
-    email: PropTypes.string,
-    website: PropTypes.string,
-    bio: PropTypes.string
+    data: PropTypes.object.isRequired,
+    navigation: PropTypes.object.isRequired,
+    loggedUser: PropTypes.object.isRequired,
+    isMyJob: PropTypes.bool.isRequired,
 };
 
 export default LawyerCard;
